@@ -4,15 +4,20 @@ What does project do ?
 - Input is then converted to a file handling command in Node.js
 - Currently only text based files are handled but more file types can be added.
 
-How to run the project ?
-- Make sure node.js is installed in your system. <a href="https://nodejs.org/en/download/prebuilt-installer" target="_blank">Installation Link</a>
-- Open command prompt from the project root folder.
-- Run the command npm start
-
 How to use the project ?
-- The project will prompt you to type some input.
+- Make sure node.js is installed in your system. <a href="https://nodejs.org/en/download/prebuilt-installer" target="_blank">Installation Link</a>
 
-- Write your text based input in the command prompt.
+- Open command prompt from the project root folder.
+
+- Type the command 'npm start' in command prompt and press enter.
+
+- The project will prompt you to Enter command. Check below points to find the command syntax.
+
+- Type your text based input command in the command prompt.
+
+- In the command which you type every separation is by one space only. 
+
+- In all of the below commands ./ refers to root of your project folder. So ./files/info.txt means in the root of your project folder files is a folder named files and inside it info.txt is present.
 
     - create file command:<br/>
         create-file \<file-path\><br/>
@@ -38,9 +43,8 @@ How to use the project ?
         read-from-file \<file-path\><br/>
         Eg:- read from file ./info.txt
 
-- In the commands above every separation is by one space only.
-
-- In all of the above examples ./ refers to root of your project folder. So ./files/info.txt means in the root of your project folder files is a folder and inside it info.txt is present.
 
 - If all the above rules are followed then project will work as expected.
+
+- To stop the project. In the command prompt press ctrl + C on windows and cmd + C on mac.
 
