@@ -40,7 +40,7 @@ How to use the project ?
     
     - read from file command:<br/>
         read-from-file \<file-path\><br/>
-        Eg:- read from file ./info.txt
+        Eg:- read-from-file ./info.txt
 
 
 - If all the above rules are followed then project will work as expected.
