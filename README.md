@@ -19,23 +19,23 @@ How to use the project ?
         Eg:- create-file ./info.txt
 
     - delete file command:<br/>
-        delete-file <file-path><br/>
+        delete-file \<file-path\><br/>
         Eg:- delete-file ./info.txt
 
     - copy file command:<br/>
-        copy-file <source-file-path> <destination-file-path><br/>
+        copy-file \<source-file-path\> \<destination-file-path\><br/>
         Eg:- copy-file ./info1.txt ./info2.txt
 
     - rename file command:<br/>
-        rename-file <file-path-with-old-name> <file-path-with-new-name><br/>
+        rename-file \<file-path-with-old-name\> \<file-path-with-new-name\><br/>
         Eg:- rename-file ./info1.txt ./info2.txt 
 
     - append to file command:<br/>
-        append-to-file <file-path> <some-content><br/>
+        append-to-file \<file-path\> \<some-content\><br/>
         Eg:- append-to-file ./info.txt hello world! 
     
     - read from file command:<br/>
-        read-from-file <file-path><br/>
+        read-from-file \<file-path\><br/>
         Eg:- read from file ./info.txt
 
 - In the commands above every separation is by one space only.
