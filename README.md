@@ -1,7 +1,6 @@
 ### File Handling Project
 What does project do ?
-- This project takes your text based input in command prompt.
-- Input is then converted to a file handling command in Node.js
+- This project receives commands from user in command prompt and does file handling based on those commands.
 - Currently only text based files are handled but more file types can be added.
 
 How to use the project ?
