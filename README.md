@@ -15,7 +15,7 @@ How to use the project ?
 - Write your text based input in the command prompt.
 
     - create file command:<br/>
-        create-file <file-path><br/>
+        create-file \<file-path\><br/>
         Eg:- create-file ./info.txt
 
     - delete file command:<br/>
