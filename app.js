@@ -22,11 +22,16 @@ function clearLine(direction) {
     });
 }
 
+function getNbOfRows() {
+    return process.stdout.rows;
+}
+
 async function clearOut() {
-    await moveCursor(0, -1);
-    await clearLine(0);
-    await moveCursor(0, -1);
-    await clearLine(0);
+    let nbRows = getNbOfRows();
+    for (let i = 0; i < nbRows - 1; i++) {
+        await moveCursor(0, -1);
+        await clearLine(0);
+    }
 }
 
 async function createFile(iFilePath) {
@@ -124,23 +129,27 @@ async function appendToFile(iFilePath, content) {
     }
 }
 
-async function readFromFile(iFilePath) {
-    console.log('Executing command...');
-    try {
-        const fileHandler = await open(iFilePath, 'r');
-        let output = '', rs = fileHandler.createReadStream();
-        rs.on('data', (chunk) => {
-            output += chunk.toString('utf-8');
-        });
-        rs.on('end', (chunk) => {
-            console.log(`Completed reading file at path --> ${iFilePath}`);
-            console.log('OUTPUT:-');
-            console.log(output);
-        });
-        fileHandler.close();
-    } catch (err) {
-        console.log(`File does not exist at path --> ${iFilePath}`);
-    }
+function readFromFile(iFilePath) {
+    return new Promise(async (resolve) => {
+        console.log('Executing command...');
+        try {
+            const fileHandler = await open(iFilePath, 'r');
+            let output = '', rs = fileHandler.createReadStream();
+            rs.on('data', (chunk) => {
+                output += chunk.toString('utf-8');
+            });
+            rs.on('end', async () => {
+                console.log(`Completed reading file at path --> ${iFilePath}`);
+                console.log('OUTPUT:-');
+                console.log(output);
+                await fileHandler.close();
+                resolve();
+            });
+        } catch (err) {
+            console.log(`File does not exist at path --> ${iFilePath}`);
+            resolve();
+        }
+    })
 }
 
 function ensureTextFiles(...iFilePaths) {
