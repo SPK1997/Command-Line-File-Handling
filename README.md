@@ -5,7 +5,7 @@ What does project do ?
 - Currently only text based files are handled but more file types can be added.
 
 How to run the project ?
-- Make sure node.js is installed in your system.
+- Make sure node.js is installed in your system.<a href="https://nodejs.org/en/download/prebuilt-installer">Installation Link</a>
 - Open command prompt from the project root folder.
 - Run the command npm start
 
