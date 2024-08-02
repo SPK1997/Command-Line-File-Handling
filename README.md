@@ -14,28 +14,28 @@ How to use the project ?
 
 - Write your text based input in the command prompt.
 
-    - create file command:
-        create-file <file-path>
+    - create file command:<br/>
+        create-file <file-path><br/>
         Eg:- create-file ./info.txt
 
-    - delete file command:
-        delete-file <file-path>
+    - delete file command:<br/>
+        delete-file <file-path><br/>
         Eg:- delete-file ./info.txt
 
-    - copy file command:
-        copy-file <source-file-path> <destination-file-path>
+    - copy file command:<br/>
+        copy-file <source-file-path> <destination-file-path><br/>
         Eg:- copy-file ./info1.txt ./info2.txt
 
-    - rename file command:
-        rename-file <file-path-with-old-name> <file-path-with-new-name>
+    - rename file command:<br/>
+        rename-file <file-path-with-old-name> <file-path-with-new-name><br/>
         Eg:- rename-file ./info1.txt ./info2.txt 
 
-    - append to file command:
-        append-to-file <file-path> <some-content>
+    - append to file command:<br/>
+        append-to-file <file-path> <some-content><br/>
         Eg:- append-to-file ./info.txt hello world! 
     
-    - read from file command:
-        read-from-file <file-path>
+    - read from file command:<br/>
+        read-from-file <file-path><br/>
         Eg:- read from file ./info.txt
 
 - In the commands above every separation is by one space only.
