@@ -38,27 +38,46 @@ async function deleteFile(iFilePath) {
 }
 
 async function copyFileContent(iSourceFilePath, iDestFilePath) {
-    console.log('Executing command...');
-    let fileHandler1, fileHandler2;
-    try {
-        fileHandler1 = await open(iSourceFilePath, 'r');
-        fileHandler1.close();
+    return new Promise(async (resolve) => {
+        console.log('Executing command...');
+        let fileHandler1, fileHandler2;
         try {
-            fileHandler2 = await open(iDestFilePath, 'r');
-            fileHandler2.close();
+            fileHandler1 = await open(iSourceFilePath, 'r');
             try {
-                await copyFile(iSourceFilePath, iDestFilePath);
-                console.log(`Content of file copied successfully from ${iSourceFilePath} to ${iDestFilePath}`);
+                fileHandler2 = await open(iDestFilePath, 'r');
+                await fileHandler2.close();
+                fileHandler2 = await open(iDestFilePath, 'w');
+                const rs = fileHandler1.createReadStream();
+                const ws = fileHandler2.createWriteStream();
+                rs.on('data', (chunk) => {
+                    if (!ws.write(chunk)) {
+                        rs.pause();
+                    }
+                });
+                ws.on('drain', () => {
+                    rs.resume();
+                });
+                rs.on('end', () => {
+                    console.log(`Content of file copied successfully from ${iSourceFilePath} to ${iDestFilePath}`);
+                    fileHandler1.close();
+                    fileHandler2.close();
+                    resolve();
+                });
+                ws.on('error', () => {
+                    console.log(`Error in writing to destination file at path --> ${iDestFilePath}`);
+                    resolve();
+                });
+                rs.on('error', () => {
+                    console.log(`Error in reading from source file at path --> ${iSourceFilePath}`);
+                    resolve();
+                });
             } catch (err) {
-                console.log('Error in copying content of file.');
-                console.log('Tip: Check README file for syntax.');
+                console.log(`File does not exist at destination path --> ${iDestFilePath}`);
             }
         } catch (err) {
-            console.log(`File does not exist at destination path --> ${iDestFilePath}`);
+            console.log(`File does not exist at source path --> ${iSourceFilePath}`);
         }
-    } catch (err) {
-        console.log(`File does not exist at source path --> ${iSourceFilePath}`);
-    }
+    })
 }
 
 async function renameFile(iSourceFilePath, iDestFilePath) {
