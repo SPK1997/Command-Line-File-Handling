@@ -43,37 +43,31 @@ async function copyFileContent(iSourceFilePath, iDestFilePath) {
         let fileHandler1, fileHandler2;
         try {
             fileHandler1 = await open(iSourceFilePath, 'r');
-            try {
-                fileHandler2 = await open(iDestFilePath, 'r');
-                await fileHandler2.close();
-                fileHandler2 = await open(iDestFilePath, 'w');
-                const rs = fileHandler1.createReadStream();
-                const ws = fileHandler2.createWriteStream();
-                rs.on('data', (chunk) => {
-                    if (!ws.write(chunk)) {
-                        rs.pause();
-                    }
-                });
-                ws.on('drain', () => {
-                    rs.resume();
-                });
-                rs.on('end', () => {
-                    console.log(`Content of file copied successfully from ${iSourceFilePath} to ${iDestFilePath}`);
-                    fileHandler1.close();
-                    fileHandler2.close();
-                    resolve();
-                });
-                ws.on('error', () => {
-                    console.log(`Error in writing to destination file at path --> ${iDestFilePath}`);
-                    resolve();
-                });
-                rs.on('error', () => {
-                    console.log(`Error in reading from source file at path --> ${iSourceFilePath}`);
-                    resolve();
-                });
-            } catch (err) {
-                console.log(`File does not exist at destination path --> ${iDestFilePath}`);
-            }
+            fileHandler2 = await open(iDestFilePath, 'w');
+            const rs = fileHandler1.createReadStream();
+            const ws = fileHandler2.createWriteStream();
+            rs.on('data', (chunk) => {
+                if (!ws.write(chunk)) {
+                    rs.pause();
+                }
+            });
+            ws.on('drain', () => {
+                rs.resume();
+            });
+            rs.on('end', () => {
+                console.log(`Content of file copied successfully from ${iSourceFilePath} to ${iDestFilePath}`);
+                fileHandler1.close();
+                fileHandler2.close();
+                resolve();
+            });
+            ws.on('error', () => {
+                console.log(`Error in writing to destination file at path --> ${iDestFilePath}`);
+                resolve();
+            });
+            rs.on('error', () => {
+                console.log(`Error in reading from source file at path --> ${iSourceFilePath}`);
+                resolve();
+            });
         } catch (err) {
             console.log(`File does not exist at source path --> ${iSourceFilePath}`);
         }
